@@ -36,15 +36,26 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
-        </div>
-        <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
-        </div>
-    </nav>
+    <header>
+        <nav class="top-nav display_flex_wrap wd_100">
+            <div class="display_flex_wrap wd_100">
+                <div class="top-nav-title wd_10">
+                    <a href="<?= $this->Url->build('/') ?>">T</a>
+                </div>
+                <div class="wd_90">
+                    <input type="text">
+                </div>
+            </div>
+            <div class="top-nav-links display_flex_wrap wd_100">
+                <button>
+                    ログイン
+                </button>
+                <button>
+                    新規作成
+                </button>
+            </div>
+        </nav>
+    </header>
     <main class="main">
         <div class="container">
             <?= $this->Flash->render() ?>
