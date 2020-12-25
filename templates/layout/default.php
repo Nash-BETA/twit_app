@@ -47,12 +47,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 </div>
             </div>
             <div class="top-nav-links display_flex_wrap wd_100">
-                <button>
+                <a href="<?= SITE_URL . "users/login"?>">
                     ログイン
-                </button>
-                <button>
+                </a>
+                <a href="<?= SITE_URL . "users/add"?>">
                     新規作成
-                </button>
+                </a>
             </div>
         </nav>
     </header>

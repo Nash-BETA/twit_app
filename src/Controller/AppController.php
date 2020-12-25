@@ -40,6 +40,9 @@ class AppController extends Controller
     public function initialize(): void
     {
         parent::initialize();
+        //Authのコンポーネント(プラグイン)の読み込み
+        $this->loadComponent('Authentication.Authentication');
+
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
