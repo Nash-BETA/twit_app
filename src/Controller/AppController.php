@@ -52,5 +52,9 @@ class AppController extends Controller
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+
+        //ログイン状態の確認で使用
+        $login_user = $this->Authentication->getResult()->getData();
+        $this->set(compact('login_user'));
     }
 }

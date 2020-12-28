@@ -17,7 +17,7 @@ class UsersController extends AppController
         $logicTest = new UserLogic();
 
         //未ログイン時でもアクセスできるアクションの指定
-        $this->Authentication->allowUnauthenticated(['login','add','logout']);
+        $this->Authentication->allowUnauthenticated(['signin','add','login']);
     }
 
     /**
@@ -53,6 +53,8 @@ class UsersController extends AppController
         // ユーザーの送信と認証に失敗した場合にエラーを表示します
         if ($this->request->is('post') && !$result->isValid()) {
             $this->Flash->error(__('Invalid email or password'));
+            return $this->redirect(['controller' => 'Users', 'action' => 'sigin']);
+
         }
     }
 
@@ -63,7 +65,7 @@ class UsersController extends AppController
         // POSTやGETに関係なく、ユーザーがログインしていればリダイレクトします
         if ($result->isValid()) {
             $this->Authentication->logout();
-            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+            return $this->redirect(['controller' => 'Users', 'action' => 'sigin']);
         }
     }
 
@@ -90,7 +92,7 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('アカウントを作成しました.'));
 
-                return $this->redirect(['action' => 'login']);
+                return $this->redirect(['action' => 'sigin']);
             }
             $this->Flash->error(__('登録に失敗しました.'));
         }

@@ -47,12 +47,18 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 </div>
             </div>
             <div class="top-nav-links display_flex_wrap wd_100">
-                <a href="<?= SITE_URL . "users/login"?>">
-                    ログイン
-                </a>
-                <a href="<?= SITE_URL . "users/add"?>">
-                    新規作成
-                </a>
+                <?php if($login_user):?>
+                    <a href="<?= SITE_URL . "users/logout"?>">
+                        ログアウト
+                    </a>
+                <?php else: ?>
+                    <a href="<?= SITE_URL . "users/signin"?>">
+                        ログイン
+                    </a>
+                    <a href="<?= SITE_URL . "users/add"?>">
+                        新規作成
+                    </a>
+                <?php endif ?>
             </div>
         </nav>
     </header>

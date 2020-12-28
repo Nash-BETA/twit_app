@@ -15,7 +15,7 @@
         <div class="users form content">
             <?= $this->Form->create( null,['url' => [
                 'controller' => 'Users',
-                'action' => 'post'
+                'action' => 'login'
             ]]) ?>
             <fieldset>
                 <legend><?= __('Signin User') ?></legend>

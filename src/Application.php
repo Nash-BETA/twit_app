@@ -29,20 +29,23 @@ use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 
-//use App\Authentication\AppAuthenticationServiceProvider;
-use Authentication\AuthenticationService;
-use Authentication\AuthenticationServiceInterface;
-use Authentication\AuthenticationServiceProviderInterface;
-use Authentication\Identifier\IdentifierInterface;
+use App\Authentication\AppAuthenticationServiceProvider;
 use Authentication\Middleware\AuthenticationMiddleware;
-use Psr\Http\Message\ServerRequestInterface;
+
+
+
+
+
+
+use Cake\Routing\Router;
+
 /**
  * Application setup class.
  *
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication implements AuthenticationServiceProviderInterface
+class Application extends BaseApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -102,8 +105,9 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // `new RoutingMiddleware($this, '_cake_routes_')`
             ->add(new RoutingMiddleware($this))
 
-            ->add(new AuthenticationMiddleware($this))
-
+            ->add(new AuthenticationMiddleware(
+                new AppAuthenticationServiceProvider()
+            ))
             // Parse various types of encoded request bodies so that they are
             // available as array through $request->getData()
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
@@ -149,39 +153,4 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // Load more plugins here
     }
 
-    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
-    {
-        // ログイン必須ページにアクセスしたときのリダイレクト先
-        $service = new AuthenticationService();
-
-        // 認証されていない場合にユーザーがどこにリダイレクトするかを定義します。
-        $service->setConfig([
-            'unauthenticatedRedirect' => SITE_DIRECTORY . '/users/login',
-            'queryParam' => 'redirect',
-        ]);
-
-        $fields = [
-            IdentifierInterface::CREDENTIAL_USERNAME => 'account_name',
-            IdentifierInterface::CREDENTIAL_PASSWORD => 'password'
-        ];
-
-        // 認証者を読み込みます。セッションを優先してください。
-        $service->loadAuthenticator('Authentication.Session');
-        $service->loadAuthenticator('Authentication.Form', [
-            'fields' => [
-                'username' => 'account_name',
-                'password' => 'password'
-            ],
-            'loginUrl' => SITE_DIRECTORY .'/users/post',
-        ]);
-
-        // 識別子を読み込みます。
-        $service->loadIdentifier('Authentication.Password', compact('fields'));
-
- //       $service->loadIdentifier('Authentication.Password', [
- //           'fields' => $fields
- //       ]);
-
-        return $service;
-    }
 }
