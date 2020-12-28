@@ -28,17 +28,10 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Cake\Routing\Router;
 
 use App\Authentication\AppAuthenticationServiceProvider;
 use Authentication\Middleware\AuthenticationMiddleware;
-
-
-
-
-
-
-use Cake\Routing\Router;
-
 /**
  * Application setup class.
  *

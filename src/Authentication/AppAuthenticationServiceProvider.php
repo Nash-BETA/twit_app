@@ -15,7 +15,7 @@ class AppAuthenticationServiceProvider implements AuthenticationServiceProviderI
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
     {
 
- // ログイン必須ページにアクセスしたときのリダイレクト先
+        // ログイン必須ページにアクセスしたときのリダイレクト先
         $service = new AuthenticationService();
 
         // 認証されていない場合にユーザーがどこにリダイレクトするかを定義します。
@@ -42,9 +42,6 @@ class AppAuthenticationServiceProvider implements AuthenticationServiceProviderI
         // 識別子を読み込みます。
         $service->loadIdentifier('Authentication.Password', compact('fields'));
 
- //       $service->loadIdentifier('Authentication.Password', [
- //           'fields' => $fields
- //       ]);
 
         return $service;
     }
