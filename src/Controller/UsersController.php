@@ -25,11 +25,9 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index()
+    public function home()
     {
-        $users = $this->paginate($this->Users);
 
-        $this->set(compact('users'));
     }
 
 
@@ -47,13 +45,13 @@ class UsersController extends AppController
         // POSTやGETに関係なく、ユーザーがログインしていればリダイレクトします
         if ($result->isValid()) {
             // ログイン成功後に /にリダイレクトします
-            $target = $this->Authentication->getLoginRedirect() ?? '/home';
-            return $this->redirect($target);
+
+            return $this->redirect(['controller' => 'Users', 'action' => 'index']);
         }
         // ユーザーの送信と認証に失敗した場合にエラーを表示します
         if ($this->request->is('post') && !$result->isValid()) {
             $this->Flash->error(__('Invalid email or password'));
-            return $this->redirect(['controller' => 'Users', 'action' => 'sigin']);
+            return $this->redirect(['controller' => 'Users', 'action' => 'signin']);
 
         }
     }
@@ -65,7 +63,7 @@ class UsersController extends AppController
         // POSTやGETに関係なく、ユーザーがログインしていればリダイレクトします
         if ($result->isValid()) {
             $this->Authentication->logout();
-            return $this->redirect(['controller' => 'Users', 'action' => 'sigin']);
+            return $this->redirect(['controller' => 'Users', 'action' => 'signin']);
         }
     }
 

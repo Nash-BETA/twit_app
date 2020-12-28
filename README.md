@@ -12,7 +12,7 @@ CREATE TABLE `twit`.`users`(
     `account_name` CHAR(10) CHARACTER
 SET
     utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '表示ID',
-    `password` VARCHAR(15) CHARACTER
+    `password` VARCHAR(150) CHARACTER
 SET
     utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'パスワード',
     `name` VARCHAR(200) CHARACTER
