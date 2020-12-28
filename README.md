@@ -6,7 +6,7 @@
 ## ロジック周り
 
 ## テーブル回り
-
+### ユーザー
 CREATE TABLE `twit`.`users`(
     `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `account_name` CHAR(10) CHARACTER
@@ -24,6 +24,7 @@ SET
     PRIMARY KEY(`id`)
 ) ENGINE = InnoDB;
 
+### ツイートテーブル
 CREATE TABLE `twit`.`tweets`(
     `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `user_id` INT(10) NOT NULL COMMENT 'USER_ID',
@@ -31,5 +32,21 @@ CREATE TABLE `twit`.`tweets`(
 SET
     utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'つぶやき内容',
     `created` DATETIME NOT NULL COMMENT '作成日',
+    PRIMARY KEY(`id`)
+) ENGINE = InnoDB;
+
+### お気に入りテーブル
+CREATE TABLE `twit`.`favorites`(
+    `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `users_id` MEDIUMINT(10) NOT NULL COMMENT 'ユーザーID',
+    `tweet_id` MEDIUMINT(10) NOT NULL COMMENT 'ツイートID',
+    PRIMARY KEY(`id`)
+) ENGINE = InnoDB;
+
+### フォローテーブル
+CREATE TABLE `twit`.`follows`(
+    `id` INT(10) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `users_id` MEDIUMINT(10) NOT NULL COMMENT 'ユーザーID',
+    `follow_user_id` MEDIUMINT(10) NOT NULL COMMENT 'フォローユーザーID',
     PRIMARY KEY(`id`)
 ) ENGINE = InnoDB;

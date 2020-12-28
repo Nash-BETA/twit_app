@@ -21,22 +21,36 @@ class UsersController extends AppController
     }
 
     /**
-     * Index method
+     * index - mypage
      *
-     * @return \Cake\Http\Response|null|void Renders view
      */
-    public function home()
+    public function index()
     {
-
+        $auth_user = $this->Authentication->getResult()->getData();
     }
 
 
-    //ログイン画面
+    /**
+     * home - ホーム画面
+     *
+     */
+    public function home()
+    {
+        $auth_user = $this->Authentication->getResult()->getData();
+    }
+
+    /**
+     * signin - ログイン画面
+     *
+     */
     public function signin()
     {
     }
 
-    //ログインの処理
+    /**
+     * login - ログイン処理
+     *
+     */
     public function login()
     {
 
@@ -68,17 +82,6 @@ class UsersController extends AppController
     }
 
     /**
-     * View
-     */
-    public function view($id = null)
-    {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
-        $this->set(compact('user'));
-    }
-
-    /**
      * Add
      *
      */
@@ -93,27 +96,6 @@ class UsersController extends AppController
                 return $this->redirect(['action' => 'sigin']);
             }
             $this->Flash->error(__('登録に失敗しました.'));
-        }
-        $this->set(compact('user'));
-    }
-
-    /**
-     * Edit method
-     *
-     */
-    public function edit($id = null)
-    {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
     }
