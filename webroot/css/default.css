@@ -22,10 +22,29 @@ header {
     width: 90%;
 }
 
+.wd_75{
+    width: 75%;
+}
+
 .wd_50{
     width: 50%;
 }
 
+.wd_25{
+    width: 25%;
+}
+
 .wd_10{
     width: 10%;
+}
+
+
+
+.un_list {
+    list-style: none;
+}
+
+.flex_warp{
+    display: flex;
+    flex-wrap: wrap;
 }

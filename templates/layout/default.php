@@ -65,7 +65,19 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <main class="main">
         <div class="container">
             <?= $this->Flash->render() ?>
-            <?= $this->fetch('content') ?>
+            <div class="row">
+                <aside class="column">
+                    <div class="side-nav">
+                        <h4 class="heading"><?= __('Actions') ?></h4>
+                        <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+                    </div>
+                </aside>
+                <div class="column-responsive column-80">
+                    <div class="users form content">
+                        <?= $this->fetch('content') ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <footer>
