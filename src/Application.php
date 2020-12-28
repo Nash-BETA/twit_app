@@ -28,7 +28,10 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Cake\Routing\Router;
 
+use App\Authentication\AppAuthenticationServiceProvider;
+use Authentication\Middleware\AuthenticationMiddleware;
 /**
  * Application setup class.
  *
@@ -46,6 +49,8 @@ class Application extends BaseApplication
     {
         // Call parent to load bootstrap from files.
         parent::bootstrap();
+
+        $this->addPlugin('Authentication');
 
         if (PHP_SAPI === 'cli') {
             $this->bootstrapCli();
@@ -93,6 +98,9 @@ class Application extends BaseApplication
             // `new RoutingMiddleware($this, '_cake_routes_')`
             ->add(new RoutingMiddleware($this))
 
+            ->add(new AuthenticationMiddleware(
+                new AppAuthenticationServiceProvider()
+            ))
             // Parse various types of encoded request bodies so that they are
             // available as array through $request->getData()
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
@@ -137,4 +145,5 @@ class Application extends BaseApplication
 
         // Load more plugins here
     }
+
 }

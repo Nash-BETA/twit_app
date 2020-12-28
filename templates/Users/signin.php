@@ -13,14 +13,15 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="users form content">
-            <?= $this->Form->create($user) ?>
+            <?= $this->Form->create( null,['url' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ]]) ?>
             <fieldset>
-                <legend><?= __('Add User') ?></legend>
+                <legend><?= __('Signin User') ?></legend>
                 <?php
-                    echo $this->Form->control('account_name');
-                    echo $this->Form->control('password');
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('deleted');
+                    echo $this->Form->control('account_name', ['required' => true]);
+                    echo $this->Form->control('password', ['required' => true]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

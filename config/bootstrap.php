@@ -212,3 +212,21 @@ ServerRequest::addDetector('tablet', function ($request) {
 //Inflector::rules('plural', ['/^(inflect)or$/i' => '\1ables']);
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
+
+//本番ならば
+if(Configure::read('debug') === false){
+    //サイトドメイン
+    define('SITE_URL', Router::url('/', true));
+    //サイトディレクトリdirectory
+    define('SITE_DIRECTORY', '');
+    //本番かローカルかのviewの出し分け様
+    define('WEB_CONDITION', true);
+//ローカルならば
+}else{
+    //サイトドメイン
+    define('SITE_URL', Router::url('/', true) . "twit/");
+    //サイトディレクトリdirectory
+    define('SITE_DIRECTORY', '/twit');
+    //本番かローカルかのviewの出し分け様
+    define('WEB_CONDITION', false);
+}
