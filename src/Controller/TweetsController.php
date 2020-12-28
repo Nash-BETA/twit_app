@@ -9,7 +9,7 @@ class TweetsController extends AppController
         parent::beforeFilter($event);
 
         //未ログイン時でもアクセスできるアクションの指定
-        $this->Authentication->addUnauthenticatedActions(['index']);
+//        $this->Authentication->addUnauthenticatedActions(['index']);
     }
 
 

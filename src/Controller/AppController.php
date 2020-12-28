@@ -40,7 +40,7 @@ class AppController extends Controller
     public function initialize(): void
     {
         parent::initialize();
-        //Authのコンポーネント(プラグイン)の読み込み
+        //Authのコンポーネント(プラグイン)の読み込み(これを外すとハッシュ化が解除される)
         $this->loadComponent('Authentication.Authentication');
 
 

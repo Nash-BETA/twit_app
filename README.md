@@ -15,7 +15,7 @@ SET
     `password` VARCHAR(15) CHARACTER
 SET
     utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT 'パスワード',
-    `name` VARCHAR(15) CHARACTER
+    `name` VARCHAR(200) CHARACTER
 SET
     utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '名前',
     `created` DATETIME NOT NULL COMMENT '作成日',

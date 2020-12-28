@@ -33,6 +33,11 @@ class UsersController extends AppController
     }
 
 
+    //ログイン画面
+    public function signin()
+    {
+    }
+
     //ログインの処理
     public function login()
     {
@@ -70,7 +75,6 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);
-
         $this->set(compact('user'));
     }
 

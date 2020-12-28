@@ -21,6 +21,18 @@ use Cake\Auth\DefaultPasswordHasher;
  */
 class User extends Entity
 {
+
+
+    protected $_accessible = [
+        'account_name' => true,
+        'password' => true,
+        'name' => true,
+        'created' => true,
+        'deleted' => true,
+        'deleted_date' => true,
+    ];
+
+
     /**
      * Fields that are excluded from JSON versions of the entity.
      *
@@ -33,10 +45,9 @@ class User extends Entity
     /**
      * _setPassword - パスワードカラムのハッシュ化
      */
-    protected function _setPassword($password)
+    protected function _setPassword(string $password)
     {
-        if(strlen($password) > 0){
-            return (new DefaultPasswordHasher)->hash($password);
-        }
+        $hasher = new DefaultPasswordHasher();
+        return $hasher->hash($password);
     }
 }

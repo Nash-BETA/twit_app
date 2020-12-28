@@ -154,11 +154,9 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // ログイン必須ページにアクセスしたときのリダイレクト先
         $service = new AuthenticationService();
 
-
-
         // 認証されていない場合にユーザーがどこにリダイレクトするかを定義します。
         $service->setConfig([
-            'unauthenticatedRedirect' => '/users/login',
+            'unauthenticatedRedirect' => SITE_DIRECTORY . '/users/login',
             'queryParam' => 'redirect',
         ]);
 
@@ -170,12 +168,19 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // 認証者を読み込みます。セッションを優先してください。
         $service->loadAuthenticator('Authentication.Session');
         $service->loadAuthenticator('Authentication.Form', [
-            'fields' => $fields,
-            'loginUrl' => SITE_DIRECTORY .'/users/login',
+            'fields' => [
+                'username' => 'account_name',
+                'password' => 'password'
+            ],
+            'loginUrl' => SITE_DIRECTORY .'/users/post',
         ]);
 
         // 識別子を読み込みます。
         $service->loadIdentifier('Authentication.Password', compact('fields'));
+
+ //       $service->loadIdentifier('Authentication.Password', [
+ //           'fields' => $fields
+ //       ]);
 
         return $service;
     }
